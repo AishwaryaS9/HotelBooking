@@ -11,7 +11,6 @@ const Hero = () => {
             <p className='max-w-130 mt-2 text-sm md:text-base'>Unparalled luxury and comfort await at the world's most exclusive hotels and resorts. Start your journey today.</p>
 
             <form className='bg-white text-gray-500 rounded-lg px-6 py-4 mt-8 flex flex-col md:flex-row max-md:items-start gap-4 max-md:mx-auto'>
-
                 <div>
                     <div className='flex items-center gap-2'>
                         <img src={assets.calenderIcon} alt='' className='h-4' />
