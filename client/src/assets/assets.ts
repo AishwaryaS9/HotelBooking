@@ -37,7 +37,7 @@ import listIcon from "./listIcon.svg";
 import uploadArea from "./uploadArea.svg";
 import totalBookingIcon from "./totalBookingIcon.svg";
 import totalRevenueIcon from "./totalRevenueIcon.svg";
-
+import type { Amenity } from '../utils/interface'
 
 export const assets = {
     logo,
@@ -96,7 +96,7 @@ export const testimonials = [
 ];
 
 // Facility Icon
-export const facilityIcons = {
+export const facilityIcons: Record<Amenity, string> = {
     "Free WiFi": assets.freeWifiIcon,
     "Free Breakfast": assets.freeBreakfastIcon,
     "Room Service": assets.roomServiceIcon,
