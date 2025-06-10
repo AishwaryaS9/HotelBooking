@@ -1,7 +1,7 @@
-import React from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Home from './pages/Home';
+import Footer from './components/Footer';
 
 const App = () => {
   const isOwnerPath = useLocation().pathname.includes("owner");
@@ -11,9 +11,10 @@ const App = () => {
       {!isOwnerPath && <Navbar />}
       <div className='min-h-[70vh]'>
         <Routes>
-          <Route element={<Home/>} path='/'/>
+          <Route element={<Home />} path='/' />
         </Routes>
       </div>
+      <Footer />
     </div>
   )
 }
