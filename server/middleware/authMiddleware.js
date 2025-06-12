@@ -1,19 +1,41 @@
-import User from '../models/User.js'
+// import User from '../models/User.js'
+
+// export const protect = async (req, res, next) => {
+
+//     const { userId } = req.auth();
+//     if (!userId) {
+//         res.json({ success: false, message: "Not Authorized" });
+//     } else {
+//         const user = await User.findById(userId);
+//         req.user = user;
+//         next();
+//     }
+// }
+
+
+
+import User from "../models/User.js";
 
 export const protect = async (req, res, next) => {
+    try {
+        const { userId } = await req.auth();
 
-    const { userId } = req.auth();
-    console.log("userId auth", userId)
-    if (!userId) {
-        res.json({ success: false, message: "Not Authorized" });
-    } else {
+        if (!userId) {
+            return res.status(401).json({ success: false, message: "Not authenticated" });
+        }
+
         const user = await User.findById(userId);
-        // const user = await User.findById(userId.toString());
-        // console.log("auth user", user)
-        console.log("FindOne Result:", user);
+        console.log("USER==>", user);
+
+        if (!user) {
+            return res.status(404).json({ success: false, message: "User not found" });
+        }
+
         req.user = user;
+        console.log("USER  req.user==>", req.user);
         next();
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: "Authentication error" });
     }
-}
-
-
+};

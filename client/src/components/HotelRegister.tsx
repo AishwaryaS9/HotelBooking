@@ -19,12 +19,13 @@ const HotelRegister = () => {
             })
             console.log("hotel data", data)
             if (data.success) {
+                console.log('triggered 1')
                 toast.success(data.message)
                 setIsOwner(true)
                 setShowHotelReg(false)
-
-            } 
+            }
             else {
+                console.log("triggered2")
                 toast.error(data.message)
             }
         } catch (error) {
