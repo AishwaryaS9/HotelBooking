@@ -4,7 +4,6 @@ import { assets } from '../assets/assets'
 import type { HotelCardProps } from '../utils/interface'
 
 const HotelCard: React.FC<HotelCardProps> = ({ room, index }) => {
-    console.log("ROOM", room)
     return (
         <Link to={'/rooms/' + room._id} onClick={() => scrollTo(0, 0)}
             className='relative max-w-70 w-full rounded-xl overflow-hidden bg-white

@@ -10,7 +10,6 @@ import connectCloudinary from './configs/cloudinary.js'
 import roomRouter from './routes/roomRoutes.js'
 import bookingRouter from './routes/bookingRoutes.js'
 
-
 connectDB();
 connectCloudinary();
 

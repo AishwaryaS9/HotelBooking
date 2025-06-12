@@ -1,11 +1,16 @@
-import { use } from "react";
-
 //GET /api/user
 export const getUserData = async (req, res) => {
     try {
+        const _id = req.user._id;
+        const username = req.user.username;
+        const email = req.user.email;
+        const image = req.user.image;
         const role = req.user.role;
         const recentSearchedCities = req.user.recentSearchedCities;
-        res.json({ success: true, role, recentSearchedCities });
+        const createdAt = req.user.createdAt;
+        const updatedAt = req.user.updatedAt;
+
+        res.json({ success: true, _id, username, email, image, role, recentSearchedCities, createdAt, updatedAt });
     } catch (error) {
         res.json({ success: false, message: error.message });
     }
