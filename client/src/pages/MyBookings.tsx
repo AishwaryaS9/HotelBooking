@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import Title from '../components/Title'
-import { assets, userBookingsDummyData } from '../assets/assets'
+import { assets } from '../assets/assets'
+import { useAppContext } from '../context/AppContext'
 
 const MyBookings = () => {
-    const [bookings, setBookings] = useState(userBookingsDummyData);
+    const { axios, getToken, user } = useAppContext();
+    const [bookings, setBookings] = useState([]);
 
     return (
         <div className='py-28 md:pb-35 md:pt-32 px-4 md:px-16 lg:px-24 xl:px-32'>
