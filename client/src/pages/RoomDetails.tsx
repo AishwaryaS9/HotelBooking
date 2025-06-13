@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { assets, facilityIcons, roomCommonData, } from "../assets/assets";
 import StarRating from "../components/StarRating";
-import type { Amenity } from "../utils/interface";
+import type { Amenity, RoomData } from "../utils/interface";
 import { useAppContext } from "../context/AppContext";
 import toast from "react-hot-toast";
 
@@ -10,17 +10,17 @@ const RoomDetails = () => {
     const { id } = useParams();
     const { rooms, getToken, axios, navigate } = useAppContext();
 
-    const [room, setRoom] = useState(null);
+    const [room, setRoom] = useState<RoomData | null>(null);
     const [mainImage, setMainImage] = useState<string | null>(null);
-    const [checkInDate, setCheckInDate] = useState(null);
-    const [checkOutDate, setCheckOutDate] = useState(null);
-    const [guests, setGuests] = useState(1);
+    const [checkInDate, setCheckInDate] = useState<string | null>(null);
+    const [checkOutDate, setCheckOutDate] = useState<string | null>(null);
+    const [guests, setGuests] = useState<number>(1);
     const [isAvailable, setIsAvailable] = useState(false);
 
     const checkAvailability = async () => {
         try {
-            if (checkInDate >= checkOutDate) {
-                toast.error('Check-In Date should be less than Check-Out Date')
+            if (!checkInDate || !checkOutDate || checkInDate >= checkOutDate) {
+                toast.error("Check-In Date should be less than Check-Out Date");
                 return;
             }
             const { data } = await axios.post('/api/bookings/check-availability', {
@@ -38,11 +38,11 @@ const RoomDetails = () => {
                 toast.error(data.message)
             }
         } catch (error) {
-            toast.error(error.message)
+            toast.error((error as Error).message);
         }
     }
 
-    const onSubmitHandler = async (e) => {
+    const onSubmitHandler = async (e: React.FormEvent) => {
         try {
             e.preventDefault();
             if (!isAvailable) {
@@ -65,7 +65,7 @@ const RoomDetails = () => {
                 }
             }
         } catch (error) {
-            toast.error(error.message)
+            toast.error((error as Error).message);
         }
     }
 
@@ -109,7 +109,7 @@ const RoomDetails = () => {
                     {room?.images.length > 1 && room.images.map((image, index) => (
                         <img onClick={() => setMainImage(image)}
                             key={index} src={image} alt="Room Image"
-                            className={`w-full rounded-xl shadow-md object-cover 
+                            className={`w-full rounded-xl shadow-md object-cover
                             cursor-pointer ${mainImage === image && 'outline-3 outline-orange-500'}`} />
                     ))}
                 </div>
@@ -161,7 +161,9 @@ const RoomDetails = () => {
                             Check-Out
                         </label>
                         <input onChange={(e) => setCheckOutDate(e.target.value)}
-                            min={checkInDate} disabled={!checkInDate}
+                            // min={checkInDate}
+                            min={checkInDate || undefined}
+                            disabled={!checkInDate}
                             type="date" id="checkOutDate" placeholder="Check-Out"
                             className="w-full rounded border border-gray-300 px-3 py-2 mt-1.5 outline-none" required />
                     </div>
@@ -171,7 +173,10 @@ const RoomDetails = () => {
                         <label htmlFor="guests" className="font-medium">
                             Guests
                         </label>
-                        <input onChange={(e) => setGuests(e.target.value)} value={guests}
+                        <input
+                            // onChange={(e) => setGuests(e.target.value)}
+                            onChange={(e) => setGuests(parseInt(e.target.value, 10))}
+                            value={guests}
                             type="number" id="guests" placeholder="1"
                             className="max-w-20 rounded border border-gray-300 px-3 py-2 mt-1.5 outline-none" required />
                     </div>

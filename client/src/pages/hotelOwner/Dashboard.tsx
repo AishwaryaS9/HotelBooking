@@ -3,11 +3,12 @@ import { assets } from '../../assets/assets'
 import Title from '../../components/Title'
 import { useAppContext } from '../../context/AppContext'
 import toast from 'react-hot-toast'
+import type { DashboardData } from '../../utils/interface'
 
 const Dashboard = () => {
     const { currency, user, getToken, axios } = useAppContext();
 
-    const [dashboardData, setDashboardData] = useState({
+    const [dashboardData, setDashboardData] = useState<DashboardData>({
         bookings: [],
         totalBookings: 0,
         totalRevenue: 0,
@@ -26,7 +27,7 @@ const Dashboard = () => {
                 toast.error(data.message);
             }
         } catch (error) {
-            toast.error(error.message)
+            toast.error((error as Error).message);
         }
     }
 

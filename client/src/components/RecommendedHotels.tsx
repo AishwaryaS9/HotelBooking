@@ -2,14 +2,15 @@ import { useEffect, useState } from 'react';
 import { useAppContext } from '../context/AppContext';
 import HotelCard from './HotelCard'
 import Title from './Title'
+import type { IRoom } from '../utils/interface';
 
 const RecommendedHotels = () => {
-    const { rooms, searchedCities } = useAppContext();
+    const { rooms, searchedCities }: any = useAppContext();
 
-    const [recommended, setRecommended] = useState([]);
+    const [recommended, setRecommended] = useState<IRoom[]>([]);
 
     const filterHotels = () => {
-        const filteredHotels = rooms.slice().filter(room => searchedCities.includes(room.hotel.city));
+        const filteredHotels = rooms.slice().filter((room: IRoom) => searchedCities.includes(room.hotel.city));
         setRecommended(filteredHotels)
     }
 

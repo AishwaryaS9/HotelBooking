@@ -43,7 +43,6 @@ export const createBooking = async (req, res) => {
         const isAvailable = await checkAvailability({
             checkInDate, checkOutDate, room
         });
-        console.log("Is Available", isAvailable)
         if (!isAvailable) {
             return res.json({ success: false, message: "Room is not available" });
         }
@@ -113,8 +112,7 @@ export const getUserBookings = async (req, res) => {
 
 export const getHotelBookings = async (req, res) => {
     try {
-        // const hotel = await Hotel.findOne({ owner: req.auth.userId });
-          const hotel = await Hotel.findOne({ owner: req.auth().userId });
+        const hotel = await Hotel.findOne({ owner: req.auth().userId });
         if (!hotel) {
             return res.json({ success: false, message: "No Hotel found" });
         }

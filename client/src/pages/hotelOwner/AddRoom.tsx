@@ -1,13 +1,12 @@
-import { useState } from 'react'
+import { useState, type FormEvent } from 'react'
 import Title from '../../components/Title';
 import { assets } from '../../assets/assets';
 import { useAppContext } from '../../context/AppContext';
 import toast from 'react-hot-toast';
+import type { AddRoomInputs, Amenity } from '../../utils/interface';
 
 const AddRoom = () => {
-
     const { axios, getToken } = useAppContext();
-
     const [images, setImages] = useState<{ [key: string]: File | null }>({
         1: null,
         2: null,
@@ -15,7 +14,7 @@ const AddRoom = () => {
         4: null
     });
 
-    const [inputs, setInputs] = useState({
+    const [inputs, setInputs] = useState<AddRoomInputs>({
         roomType: '',
         pricePerNight: 0,
         amenities: {
@@ -28,7 +27,7 @@ const AddRoom = () => {
     });
     const [loading, setLoading] = useState(false);
 
-    const onSubmitHandler = async (e) => {
+    const onSubmitHandler = async (e: FormEvent) => {
         e.preventDefault();
         if (!inputs.roomType || !inputs.pricePerNight || !inputs.amenities || !Object.values(images).some(image => image)) {
             toast.error("Please fill in all the details");
@@ -38,9 +37,9 @@ const AddRoom = () => {
         try {
             const formData = new FormData();
             formData.append('roomType', inputs.roomType)
-            formData.append('pricePerNight', inputs.pricePerNight)
+            formData.append('pricePerNight', String(inputs.pricePerNight))
 
-            const amenities = Object.keys(inputs.amenities).filter(key => inputs.amenities[key])
+            const amenities = Object.keys(inputs.amenities).filter((key) => inputs.amenities[key as Amenity])
             formData.append('amenities', JSON.stringify(amenities));
 
             Object.keys(images).forEach((key) => {
@@ -71,7 +70,7 @@ const AddRoom = () => {
             }
 
         } catch (error) {
-            toast.error(error.message)
+            toast.error((error as Error).message);
         } finally {
             setLoading(false);
         }

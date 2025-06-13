@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react'
 import Title from '../../components/Title';
 import { useAppContext } from '../../context/AppContext';
 import toast from 'react-hot-toast';
+import type { RoomData } from '../../utils/interface';
 
 const ListRoom = () => {
-  const [rooms, setRooms] = useState([]);
+  const [rooms, setRooms] = useState<RoomData[]>([]);
 
   const { axios, getToken, user, currency } = useAppContext();
 
@@ -22,11 +23,11 @@ const ListRoom = () => {
       }
 
     } catch (error) {
-      toast.error(error.message)
+      toast.error((error as Error).message);
     }
   }
 
-  const toggleAvailability = async (roomId) => {
+  const toggleAvailability = async (roomId: string) => {
     const { data } = await axios.post('/api/rooms/toggle-availability', { roomId }, {
       headers: {
         Authorization: `Bearer ${await getToken()}`

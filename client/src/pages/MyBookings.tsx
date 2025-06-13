@@ -3,10 +3,11 @@ import Title from '../components/Title'
 import { assets } from '../assets/assets'
 import { useAppContext } from '../context/AppContext'
 import toast from 'react-hot-toast'
+import type { UserBookingData } from '../utils/interface'
 
 const MyBookings = () => {
     const { axios, getToken, user } = useAppContext();
-    const [bookings, setBookings] = useState([]);
+    const [bookings, setBookings] = useState<UserBookingData[]>([]);
 
     const fetchUserBookings = async () => {
         try {
@@ -15,17 +16,18 @@ const MyBookings = () => {
                     Authorization: `Bearer ${await getToken()}`
                 }
             })
+            console.log('setbookings', data.bookings)
             if (data.success) {
                 setBookings(data.bookings);
             } else {
                 toast.error(data.message)
             }
         } catch (error) {
-            toast.error(error.message)
+            toast.error((error as Error).message);
         }
     }
 
-    const handlePayment = async (bookingId) => {
+    const handlePayment = async (bookingId: string) => {
         try {
             const { data } = await axios.post('/api/bookings/stripe-payment', { bookingId }, {
                 headers: {
@@ -38,7 +40,7 @@ const MyBookings = () => {
                 toast.error(data.message)
             }
         } catch (error) {
-            toast.error(error.message)
+            toast.error((error as Error).message);
         }
     }
 

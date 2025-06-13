@@ -9,7 +9,7 @@ export const getUserData = async (req, res) => {
         const recentSearchedCities = req.user.recentSearchedCities;
         const createdAt = req.user.createdAt;
         const updatedAt = req.user.updatedAt;
-
+console.log("user response", res)
         res.json({ success: true, _id, username, email, image, role, recentSearchedCities, createdAt, updatedAt });
     } catch (error) {
         res.json({ success: false, message: error.message });

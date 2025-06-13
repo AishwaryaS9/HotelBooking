@@ -6,7 +6,7 @@ const Hero = () => {
     const { navigate, getToken, axios, setSearchedCities } = useAppContext();
     const [destination, setDestination] = useState('');
 
-    const onSearch = async (e) => {
+    const onSearch = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         navigate(`/rooms?destination=${destination}`);
         await axios.post(`/api/user/store-recent-search`, { recentSearchedCity: destination }, {
