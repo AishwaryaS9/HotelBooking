@@ -1,5 +1,5 @@
-import { Routes, Route, useLocation } from 'react-router-dom'
-import Navbar from './components/Navbar'
+import { Routes, Route, useLocation } from 'react-router-dom';
+import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Footer from './components/Footer';
 import AllRooms from './pages/AllRooms';
@@ -15,11 +15,13 @@ import { useAppContext } from './context/AppContext';
 import Loader from './components/Loader';
 
 const App = () => {
-  const isOwnerPath = useLocation().pathname.includes("owner");
+  const location = useLocation();
+  const isOwnerPath = location.pathname.includes("owner");
   const { showHotelReg } = useAppContext();
-
+  const pathsWithoutFooter = ["/owner", "/owner/add-room", "/owner/list-room"];
+  const hideFooter = pathsWithoutFooter.includes(location.pathname);
   return (
-    <div>
+    <div className='font-inter'>
       <Toaster />
       {!isOwnerPath && <Navbar />}
       {showHotelReg && <HotelRegister />}
@@ -30,17 +32,17 @@ const App = () => {
           <Route path='/rooms/:id' element={<RoomDetails />} />
           <Route path='/my-bookings' element={<MyBookings />} />
           <Route path='/loader/:nextUrl' element={<Loader />} />
-          
-          <Route path='/owner' element={<Layout />} >
+
+          <Route path='/owner' element={<Layout />}>
             <Route index element={<Dashboard />} />
             <Route path="add-room" element={<AddRoom />} />
             <Route path="list-room" element={<ListRoom />} />
           </Route>
         </Routes>
       </div>
-      <Footer />
+      {!hideFooter && <Footer />}
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
