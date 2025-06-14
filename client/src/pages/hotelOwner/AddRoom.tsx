@@ -80,8 +80,7 @@ const AddRoom = () => {
         <div>
             <form onSubmit={onSubmitHandler}>
                 <Title align='left' font='Outfit' title='Add Room'
-                    subTitle='Fill in the details carefully and accurate room details, pricing, and amenities, to enhance the user booking experience.' />
-
+                    subTitle='Provide accurate details, pricing, and amenities to showcase your room and attract more bookings effectively.' />
                 {/* Upload Area for Images */}
                 <p className='text-gray-800 mt-10'>Images</p>
                 <div className='grid grid-cols-2 sm:flex gap-4 my-2 flex-wrap'>
@@ -91,7 +90,6 @@ const AddRoom = () => {
                                 src={images[key] ? URL.createObjectURL(images[key]) : assets.uploadArea} alt="" />
                             <input type="file" accept='image/*' id={`roomImage${key}`}
                                 hidden
-                                //  onChange={e => setImages({ ...images, [key]: e.target.files[0] })} 
                                 onChange={(e) => {
                                     const file = e.target.files?.[0] || null;
                                     setImages({ ...images, [key]: file });

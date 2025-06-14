@@ -126,7 +126,7 @@ const AllRooms = () => {
                 <div className='flex flex-col items-start text-left'>
                     <h1 className='font-playfair text-4xl md:text-[40px]'>Hotel Rooms</h1>
                     <p className='text-sm md:text-base text-gray-500/90 mt-2'>
-                        Take advantage of our limited-time offers and special packages to enhance your stay and create unforgettable memories.
+                        Unlock exclusive deals and unique packages crafted to elevate your experience. Make your stay unforgettable with added luxury and value.
                     </p>
                 </div>
                 {filteredRooms.map((room) => (
@@ -175,7 +175,7 @@ const AllRooms = () => {
 
             {/* Filters */}
             <div className="bg-white w-80 border border-gray-300 text-gray-300
-            max-lg:mb-8 min-lg:mt-16">
+            max-lg:mb-8 min-lg:mt-16 rounded-md">
                 <div className={`flex items-center justify-between px-5 py-2.5 min-lg:border-b border-e-gray-300
                     ${openFilters && "border-b"}`}>
                     <p className="text-base font-medium text-gray-800">FILTERS</p>

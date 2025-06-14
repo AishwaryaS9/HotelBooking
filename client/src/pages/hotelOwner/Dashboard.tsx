@@ -40,7 +40,7 @@ const Dashboard = () => {
     return (
         <div>
             <Title align='left' font='Outfit' title='Dashboard'
-                subTitle='Monitor your room listings, track bookings and analyze revenue-all in one place. Stay updated with real-time insights to ensure smooth operations.' />
+                subTitle='Manage your room listings, track bookings, and analyze revenue seamlessly in one place. Gain real-time insights to optimize operations and boost efficiency.' />
             <div className='flex gap-4 my-8'>
 
                 {/* Total Bookings */}
