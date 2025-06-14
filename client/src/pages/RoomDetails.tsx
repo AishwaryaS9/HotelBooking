@@ -29,10 +29,10 @@ const RoomDetails = () => {
             if (data.success) {
                 if (data.isAvailable) {
                     setIsAvailable(true)
-                    toast.success('Room is available')
+                    toast.success('Room is available. Don’t wait—book your stay now!')
                 } else {
                     setIsAvailable(false);
-                    toast.error('Room is not available')
+                    toast.error('Room unavailable. Try different dates or options.');
                 }
             } else {
                 toast.error(data.message)
@@ -174,7 +174,6 @@ const RoomDetails = () => {
                             Guests
                         </label>
                         <input
-                            // onChange={(e) => setGuests(e.target.value)}
                             onChange={(e) => setGuests(parseInt(e.target.value, 10))}
                             value={guests}
                             type="number" id="guests" placeholder="1"

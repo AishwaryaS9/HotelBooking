@@ -3,6 +3,7 @@ import Title from '../../components/Title';
 import { useAppContext } from '../../context/AppContext';
 import toast from 'react-hot-toast';
 import type { RoomData } from '../../utils/interface';
+import { RiHotelLine } from 'react-icons/ri';
 
 const ListRoom = () => {
   const [rooms, setRooms] = useState<RoomData[]>([]);
@@ -56,18 +57,18 @@ const ListRoom = () => {
       />
       <p className="text-lg text-gray-700 font-medium mt-8">All Rooms</p>
       <div className="w-full overflow-x-auto mt-4 border border-gray-200 rounded-lg shadow-sm">
-        <table className="w-full bg-white border-collapse">
-          <thead>
-            <tr className="bg-gray-50 text-left text-sm uppercase tracking-wider text-gray-600">
-              <th className="py-4 px-6">Name</th>
-              <th className="py-4 px-6 max-sm:hidden">Facility</th>
-              <th className="py-4 px-6">Price / Night</th>
-              <th className="py-4 px-6 text-center">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rooms.length > 0 ? (
-              rooms.map((item, index) => (
+        {rooms.length > 0 ? (
+          <table className="w-full bg-white border-collapse">
+            <thead>
+              <tr className="bg-gray-50 text-left text-sm uppercase tracking-wider text-gray-600">
+                <th className="py-4 px-6">Name</th>
+                <th className="py-4 px-6 max-sm:hidden">Facility</th>
+                <th className="py-4 px-6">Price / Night</th>
+                <th className="py-4 px-6 text-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rooms.map((item, index) => (
                 <tr
                   key={index}
                   className={`hover:bg-gray-50 ${index % 2 === 0 ? "bg-gray-50" : "bg-white"}`}
@@ -91,23 +92,25 @@ const ListRoom = () => {
                  transition-colors duration-200'></div>
                       <span className='dot absolute left-0.5 top-0.5 w-4 h-4 bg-white
                  rounded-full transition-transform duration-200 ease-in-out peer-checked:translate-x-3.5'></span>
-
                     </label>
                   </td>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={4} className="text-center py-6 text-gray-600">
-                  No rooms available to display.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <div className="flex flex-col items-center justify-center py-16">
+            <RiHotelLine className="w-16 h-16 text-blue-500" />
+            <p className="mt-4 text-md font-medium text-gray-600">
+              No rooms available to display.
+            </p>
+            <p className="mt-2 text-sm text-gray-500">
+              Add a room to start managing your listings.
+            </p>
+          </div>
+        )}
       </div>
     </div>
-
   )
 }
 

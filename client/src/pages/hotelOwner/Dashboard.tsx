@@ -69,45 +69,53 @@ const Dashboard = () => {
             {/* Recent Bookings */}
             <h2 className='text-xl text-blue-950/70 font-medium mb-5'>Recent Bookings</h2>
             <div className="bg-white rounded-lg border border-gray-300 max-h-75">
-                <div className="overflow-y-auto max-h-65" >
-                    <table className="w-full border-collapse text-sm">
-                        <thead className="bg-gray-50 sticky top-0">
-                            <tr>
-                                <th className="py-3 px-4 text-gray-800 font-medium">User Name</th>
-                                <th className="py-3 px-4 text-gray-800 font-medium max-sm:hidden">Room Name</th>
-                                <th className="py-3 px-4 text-gray-800 font-medium text-center">Total Amount</th>
-                                <th className="py-3 px-4 text-gray-800 font-medium text-center">Payment Status</th>
-                            </tr>
-                        </thead>
-                        <tbody className="text-sm">
-                            {dashboardData.bookings.map((item, index) => (
-                                <tr key={index}>
-                                    <td className="py-3 px-4 text-gray-700 border-t border-gray-300 text-center">
-                                        {item.user.username}
-                                    </td>
-                                    <td className="py-3 px-4 text-gray-700 border-t border-gray-300 max-sm:hidden text-center">
-                                        {item.room.roomType}
-                                    </td>
-                                    <td className="py-3 px-4 text-gray-700 border-t border-gray-300 text-center">
-                                        {currency} {item.totalPrice}
-                                    </td>
-                                    <td className="py-3 px-4 border-t border-gray-300 flex">
-                                        <button
-                                            className={`py-1 px-3 text-xs rounded-full mx-auto ${item.isPaid
-                                                ? 'bg-green-200 text-green-600'
-                                                : 'bg-amber-200 text-yellow-600'
-                                                }`}
-                                        >
-                                            {item.isPaid ? 'Completed' : 'Pending'}
-                                        </button>
-                                    </td>
+                {dashboardData.bookings.length === 0 ? (
+                    <div className="flex flex-col items-center justify-center py-6">
+                        <RiHotelLine className="w-16 h-16 text-blue-500" />
+                        <p className="mt-4 text-md font-medium text-gray-500">
+                            No recent bookings to display.
+                        </p>
+                    </div>
+                ) : (
+                    <div className="overflow-y-auto max-h-65">
+                        <table className="w-full border-collapse text-sm">
+                            <thead className="bg-gray-50 sticky top-0">
+                                <tr>
+                                    <th className="py-3 px-4 text-gray-800 font-medium">User Name</th>
+                                    <th className="py-3 px-4 text-gray-800 font-medium max-sm:hidden">Room Name</th>
+                                    <th className="py-3 px-4 text-gray-800 font-medium text-center">Total Amount</th>
+                                    <th className="py-3 px-4 text-gray-800 font-medium text-center">Payment Status</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                            </thead>
+                            <tbody className="text-sm">
+                                {dashboardData.bookings.map((item, index) => (
+                                    <tr key={index}>
+                                        <td className="py-3 px-4 text-gray-700 border-t border-gray-300 text-center">
+                                            {item.user.username}
+                                        </td>
+                                        <td className="py-3 px-4 text-gray-700 border-t border-gray-300 max-sm:hidden text-center">
+                                            {item.room.roomType}
+                                        </td>
+                                        <td className="py-3 px-4 text-gray-700 border-t border-gray-300 text-center">
+                                            {currency} {item.totalPrice}
+                                        </td>
+                                        <td className="py-3 px-4 border-t border-gray-300 flex">
+                                            <button
+                                                className={`py-1 px-3 text-xs rounded-full mx-auto ${item.isPaid
+                                                    ? 'bg-green-200 text-green-600'
+                                                    : 'bg-amber-200 text-yellow-600'
+                                                    }`}
+                                            >
+                                                {item.isPaid ? 'Completed' : 'Pending'}
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
             </div>
-
         </div>
     )
 }
