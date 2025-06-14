@@ -23,11 +23,13 @@ export interface IHotel {
 }
 
 export interface IRoom {
+    amenities: any;
     _id: string;
     images: string[];
     hotel: {
         name: string;
         address: string;
+        city: string
     };
     pricePerNight: number;
 }
@@ -122,8 +124,31 @@ export interface UserBookingData {
     __v: number;
 }
 
+export interface Booking {
+    user: {
+        username: string;
+    };
+    room: {
+        roomType: string;
+    };
+    totalPrice: number;
+    isPaid: boolean;
+}
+
+
 export interface DashboardData {
     totalBookings: number;
     totalRevenue: number;
-    bookings: UserBookingData[];
+    // bookings: UserBookingData[];
+    bookings: Booking[];
+}
+
+export interface CityState {
+    cities: string[];
+}
+
+export interface AddRoomInputs {
+    roomType: string;
+    pricePerNight: number;
+    amenities: Record<Amenity, boolean>;
 }

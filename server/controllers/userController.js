@@ -1,0 +1,36 @@
+//GET /api/user
+export const getUserData = async (req, res) => {
+    try {
+        const _id = req.user._id;
+        const username = req.user.username;
+        const email = req.user.email;
+        const image = req.user.image;
+        const role = req.user.role;
+        const recentSearchedCities = req.user.recentSearchedCities;
+        const createdAt = req.user.createdAt;
+        const updatedAt = req.user.updatedAt;
+console.log("user response", res)
+        res.json({ success: true, _id, username, email, image, role, recentSearchedCities, createdAt, updatedAt });
+    } catch (error) {
+        res.json({ success: false, message: error.message });
+    }
+}
+
+//Store User Recent Searched Cities
+export const storedRecentSearchedCities = async (req, res) => {
+    try {
+        const { recentSearchedCity } = req.body;
+        const user = await req.user;
+
+        if (user.recentSearchedCities.length < 3) {
+            user.recentSearchedCities.push(recentSearchedCity)
+        } else {
+            user.recentSearchedCities.shift();
+            user.recentSearchedCities.push(recentSearchedCity)
+        }
+        await user.save();
+        res.json({ success: true, message: "City added" });
+    } catch (error) {
+        res.json({ success: false, message: error.message });
+    }
+}
