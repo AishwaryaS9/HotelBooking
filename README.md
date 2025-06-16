@@ -8,7 +8,7 @@
 
 ## 🌐 Live URL & Repository
 
-- **Live Application**: [http://localhost:5173](http://localhost:5173)
+- **Live Application**: [WanderNest](https://wander-nest-sandy.vercel.app/)
 - **GitHub Repository**: [https://github.com/AishwaryaS9/HotelBooking.git](https://github.com/AishwaryaS9/HotelBooking.git)
 
 ---
