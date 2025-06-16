@@ -10,7 +10,7 @@ axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
 interface AppContextType {
     currency: string;
     navigate: ReturnType<typeof useNavigate>;
-    user: IUser | null | undefined; // Include `undefined` for compatibility
+    user: IUser | null | undefined;
     getToken: () => Promise<string>;
     isOwner: boolean;
     setIsOwner: (value: boolean) => void;
@@ -19,14 +19,11 @@ interface AppContextType {
     setShowHotelReg: (value: boolean) => void;
     searchedCities: string[];
     setSearchedCities: (cities: string[]) => void;
-    // rooms: IRoom[];
-    // setRooms: (rooms: IRoom[]) => void;
     rooms: RoomData[];
     setRooms: (rooms: RoomData[]) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
-
 interface AppProviderProps {
     children: ReactNode;
 }
@@ -61,13 +58,12 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
         if (!user) {
             return;
         }
-
         try {
             const { data } = await axios.get('/api/user', {
                 headers: {
                     Authorization: `Bearer ${await getToken()}`
                 }
-            })
+            });
             if (data.success) {
                 setIsOwner(data.role === "hotelOwner");
                 setSearchedCities(data.recentSearchedCities);

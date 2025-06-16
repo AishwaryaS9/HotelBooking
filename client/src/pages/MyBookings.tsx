@@ -124,7 +124,7 @@ const MyBookings = () => {
                     </>
                 ) : (
                     <div className="flex flex-col items-center mt-16">
-                        <RiHotelLine className="w-16 h-16 text-blue-500" />
+                        <RiHotelLine className="w-16 h-16 text-gray-500" />
                         <p className="mt-4 text-md font-medium text-gray-600">
                             No bookings found.
                         </p>

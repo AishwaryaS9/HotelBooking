@@ -173,7 +173,7 @@ const AllRooms = () => {
                     ))
                 ) : (
                     <div className="mt-35 text-center text-gray-600 flex flex-col items-center justify-center">
-                        <RiHotelLine className="w-20 h-20 text-blue-500 mt-4" />
+                        <RiHotelLine className="w-20 h-20 text-gray-500 mt-4" />
                         <p>No rooms match your filters or there are no rooms available at this time.</p>
                     </div>
                 )}
