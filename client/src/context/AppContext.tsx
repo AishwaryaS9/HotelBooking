@@ -18,15 +18,16 @@ interface AppContextType {
     showHotelReg: boolean;
     setShowHotelReg: (value: boolean) => void;
     searchedCities: string[];
-    setSearchedCities: (cities: string[]) => void;
+    setSearchedCities: React.Dispatch<React.SetStateAction<string[]>>;
     rooms: RoomData[];
-    setRooms: (rooms: RoomData[]) => void;
+    setRooms: React.Dispatch<React.SetStateAction<RoomData[]>>;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 interface AppProviderProps {
     children: ReactNode;
 }
+
 
 export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
 
@@ -37,8 +38,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
 
     const [isOwner, setIsOwner] = useState<boolean>(false);
     const [showHotelReg, setShowHotelReg] = useState<boolean>(false);
-    const [searchedCities, setSearchedCities] = useState([]);
-
+    const [searchedCities, setSearchedCities] = useState<string[]>([]);
     const [rooms, setRooms] = useState<RoomData[]>([]);
 
     const fetchRooms = async () => {
@@ -87,7 +87,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
         fetchRooms();
     }, [])
 
-    const value = {
+    const value: any = {
         currency, navigate, user, getToken, isOwner, setIsOwner,
         axios, showHotelReg, setShowHotelReg, searchedCities, setSearchedCities, rooms, setRooms
     }

@@ -3,7 +3,7 @@ export interface IUser {
     username: string;
     email: string;
     image: string;
-    role: "hotelOwner" | "guest" | "admin";
+    role: "hotelOwner" | "user";
     createdAt: string;
     updatedAt: string;
     __v: number;
